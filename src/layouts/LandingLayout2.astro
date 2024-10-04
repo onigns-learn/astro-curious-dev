@@ -1,0 +1,39 @@
+---
+import PageLayout from '~/layouts/PageLayout.astro';
+import Header from '~/components/widgets/Header.astro';
+import Footer from '~/components/widgets/Footer.astro';
+
+import { footerData } from '~/navigation';
+import type { MetaData } from '~/types';
+
+export interface Props {
+  metadata?: MetaData;
+}
+
+const { metadata } = Astro.props;
+---
+
+<PageLayout metadata={metadata}>
+  <Fragment slot="announcement">
+    <slot name="announcement" />
+  </Fragment>
+  <Fragment slot="header">
+    <slot name="header">
+      <Header
+        showToggleTheme
+        position="right"
+      />
+    </slot>
+  </Fragment>
+  <slot />
+  <Fragment slot="footer">
+      <slot name="footer">
+        <Footer 
+          footNote={footerData.footNote}
+          secondaryLinks={footerData.secondaryLinks}
+          socialLinks={footerData.socialLinks}
+          links={[]}
+          />
+      </slot>
+  </Fragment>
+</PageLayout>
